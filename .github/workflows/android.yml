@@ -31,6 +31,4 @@ jobs:
       with:
         name: GluttonIA-App-Debug
         path: app/build/outputs/apk/debug/*.apk
-      with:
-        name: GluttonIA-App-Debug
-        path: app/build/outputs/apk/debug/*.apk
+
