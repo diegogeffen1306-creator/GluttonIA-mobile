@@ -16,3 +16,7 @@
 local.properties
 .env
 debug.keystore
+
+# Registros de errores de Java
+hs_err_pid*.log
+replay_pid*.log

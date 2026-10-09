@@ -1,34 +1,45 @@
+
 name: Compilar GluttonIA APK
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Descargar el codigo de GitHub
-      uses: actions/checkout@v4
+      - name: Descargar el codigo de GitHub
+        uses: actions/checkout@v4
 
-    - name: Configurar Entorno de Java (JDK 17)
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-        cache: 'gradle'
+      - name: Configurar Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
 
-    - name: Dar permisos de ejecucion al compilador
-      run: chmod +x gradlew
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v4
 
-    - name: Compilar e instalar APK (Debug)
-      run: ./gradlew assembleDebug
+      - name: Instalar Android SDK
+        run: |
+          sdkmanager "platform-tools" \
+            "platforms;android-36" \
+            "build-tools;36.0.0"
 
-    - name: Subir el archivo APK resultante
-      uses: actions/upload-artifact@v4
-      with:
-        name: GluttonIA-App-Debug
-        path: app/build/outputs/apk/debug/*.apk
+      - name: Dar permisos al Gradle Wrapper
+        run: chmod +x gradlew
 
+      - name: Compilar APK Debug
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Guardar APK compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: GluttonIA-App-Debug
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
