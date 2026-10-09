@@ -1,0 +1,6 @@
+{
+  "name": "Menú Digital",
+  "description": "Explora el menú del restaurante conectado a tu API local en 192.168.2.13 con platos destacados, categorías y detalles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
