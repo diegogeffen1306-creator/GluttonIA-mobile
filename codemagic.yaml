@@ -2,7 +2,7 @@ workflows:
   android-apk-build:
     name: GluttonIA Mobile APK
     max_build_duration: 30
-    instance_type: linux_x2
+    instance_type: linux
     scripts:
       - name: Compilar instalador Debug APK
         script: |
